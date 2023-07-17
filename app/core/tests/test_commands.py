@@ -34,7 +34,7 @@ class CommandTests(SimpleTestCase):
         Test waiting for the database with polling
         :return:
         """
-        # Raise Psycopg2Error the first 2 times, then raise 3 OperationalErrors, then True
+        # Raise Psycopg2Error twice, then OperationalError thrice, then True
         patched_check.side_effect = [Psycopg2Error] * 2 + \
             [OperationalError] * 3 + [True]
 

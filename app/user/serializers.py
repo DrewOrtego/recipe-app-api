@@ -32,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
         """
         Update and return user
         :param instance: the model instance that will be updated
-        :param validated_data: data that has passed through serializer validation
+        :param validated_data: data that passed serializer validation
         :return user: updated database entry for the user
         """
         password = validated_data.pop('password', None)

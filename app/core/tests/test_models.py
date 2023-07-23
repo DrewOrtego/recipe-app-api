@@ -80,7 +80,10 @@ class ModelTest(TestCase):
         """
         Test creating a recipe is successful
         """
-        user = get_user_model().objects.create_user("test@example.com", "testpass123")
+        user = get_user_model().objects.create_user(
+            "test@example.com",
+            "testpass123",
+        )
         recipe = models.Recipe.objects.create(
             user=user,
             title="Sample recipe name",
@@ -107,6 +110,9 @@ class ModelTest(TestCase):
         Test creating an ingredient is successful
         """
         user = create_user()
-        ingredient = models.Ingredient.objects.create(user=user, name="Ingredient1")
+        ingredient = models.Ingredient.objects.create(
+            user=user,
+            name="Ingredient1",
+        )
 
         self.assertEqual(str(ingredient), ingredient.name)

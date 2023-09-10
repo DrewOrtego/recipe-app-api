@@ -8,7 +8,6 @@ from drf_spectacular.utils import (
     OpenApiTypes,
 )
 from rest_framework import (
-    mixins,
     status,
     viewsets,
 )
@@ -71,7 +70,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
             ingredient_ids = self._params_to_ints(ingredients)
             queryset = queryset.filter(ingredients__id__in=ingredient_ids)
 
-        return queryset.filter(user=self.request.user).order_by("-id").distinct()
+        return queryset.filter(
+            user=self.request.user).order_by("-id").distinct()
 
     def get_serializer_class(self):
         """
@@ -130,12 +130,14 @@ class BaseRecipeAttrViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Filter queryset to authenticated user."""
-        assigned_only = bool(int(self.request.query_params.get("assigned_only", 0)))
+        assigned_only = bool(int(
+            self.request.query_params.get("assigned_only", 0)))
         queryset = self.queryset
         if assigned_only:
             queryset = queryset.filter(recipe__isnull=False)
 
-        return queryset.filter(user=self.request.user).order_by("-name").distinct()
+        return queryset.filter(
+            user=self.request.user).order_by("-name").distinct()
 
 
 class TagViewSet(BaseRecipeAttrViewSet):

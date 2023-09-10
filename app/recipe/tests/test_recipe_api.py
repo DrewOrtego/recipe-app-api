@@ -11,8 +11,6 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-import logging
-
 from rest_framework import status
 from rest_framework.test import APIClient
 
@@ -510,7 +508,8 @@ class PrivateRecipeAPITests(TestCase):
         """
         recipe1 = create_recipe(user=self.user, title="Posh Beans on Toast")
         recipe2 = create_recipe(user=self.user, title="Chicken Cacciatore")
-        ingredient1 = Ingredient.objects.create(user=self.user, name="Feta Cheese")
+        ingredient1 = Ingredient.objects.create(
+            user=self.user, name="Feta Cheese")
         ingredient2 = Ingredient.objects.create(user=self.user, name="Chicken")
         recipe1.ingredients.add(ingredient1)
         recipe2.ingredients.add(ingredient2)

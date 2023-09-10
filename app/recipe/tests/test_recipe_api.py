@@ -25,7 +25,7 @@ from core.models import (
 from recipe.serializers import RecipeDetailSerializer, RecipeSerializer
 
 
-RECIPES_URL = reverse("recipe:recipes")
+RECIPES_URL = reverse("recipe:recipe-list")
 
 
 def detail_url(recipe_id):
@@ -73,12 +73,12 @@ class PublicRecipeAPITests(TestCase):
     """
 
     def setUp(self):
-        self.client = APIClient()
+        # self.client = APIClient()
         self.user = create_user(
             email="user@example.com",
             password="testpass123",
         )
-        self.client.force_authenticate(self.user)
+        # self.client.force_authenticate(self.user)
 
     def test_auth_required(self):
         """

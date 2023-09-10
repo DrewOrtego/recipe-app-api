@@ -81,7 +81,10 @@ class ModelTest(TestCase):
         """
         Test creating a recipe is successful
         """
-        user = get_user_model().objects.create_user("test@example.com", "testpass123")
+        user = get_user_model().objects.create_user(
+            "test@example.com",
+            "testpass123",
+        )
         recipe = models.Recipe.objects.create(
             user=user,
             title="Sample recipe name",
@@ -112,3 +115,15 @@ class ModelTest(TestCase):
         mock_uuid.return_value = uuid
         file_path = models.recipe_image_file_path(None, "example.jpg")
         self.assertEqual(file_path, f"uploads/recipe/{uuid}.jpg")
+
+    def test_create_ingredients(self):
+        """
+        Test creating an ingredient is successful
+        """
+        user = create_user()
+        ingredient = models.Ingredient.objects.create(
+            user=user,
+            name="Ingredient1",
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
